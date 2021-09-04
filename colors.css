@@ -49,9 +49,9 @@ path, i, svg {
     width: 80%;
     background: rgb(233, 233, 233);
     border-radius: 1rem 1rem 0rem 0rem;
-    pointer-events: none;
+    /* pointer-events: none;
     opacity: 0; 
-    transform: translateY(100px); 
+    transform: translateY(100px);  */
     transition: all 0.5s ease-in-out;
 }
 
@@ -115,3 +115,14 @@ path, i, svg {
     border: none;
     background: none;
 }
+
+
+input[type="range"] {
+    -webkit-appearance: none;
+    margin: 1rem 0rem;
+    width: 100%;
+    position: relative;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
