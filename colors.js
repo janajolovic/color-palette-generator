@@ -4,6 +4,10 @@ const sliders = document.querySelectorAll('input[type="range"]');
 const currentHex = document.querySelectorAll(".color h2");
 let initialColors;
 const popup = document.querySelector(".copy-container");
+const adjustButton = document.querySelectorAll(".adjust");
+const closeAdjustments = document.querySelectorAll(".close-adjustment");
+const sliderContainers = document.querySelectorAll(".sliders");
+
 
 sliders.forEach(slider => {
     slider.addEventListener("input", hslControls)
@@ -26,6 +30,18 @@ popup.addEventListener('transitionend', () => {
     popup.classList.remove("active");
     popupBox.classList.remove("active");
 })
+
+adjustButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+        openAdjustmentPanel(index);
+    })
+});
+
+closeAdjustments.forEach((button, index) => {
+    button.addEventListener("click", () => {
+        closeAdjustmentPanel(index);
+    })
+});
 
 function generateHex() {
     // letters = "0123456789ABCDEF";
@@ -162,6 +178,14 @@ function copyToClipboard(hex) {
     const popupBox = popup.children[0];
     popup.classList.add("active");
     popupBox.classList.add("active");
+}
+
+function openAdjustmentPanel(index) {
+    sliderContainers[index].classList.toggle("active");
+}
+
+function closeAdjustmentPanel(index) {
+    sliderContainers[index].classList.remove("active");
 }
 
 randomColors();
