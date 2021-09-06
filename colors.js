@@ -3,7 +3,7 @@ const generateBtn = document.querySelector(".generate");
 const sliders = document.querySelectorAll('input[type="range"]');
 const currentHex = document.querySelectorAll(".color h2");
 let initialColors;
-
+const popup = document.querySelector(".copy-container");
 
 sliders.forEach(slider => {
     slider.addEventListener("input", hslControls)
@@ -15,6 +15,17 @@ colorDivs.forEach((slider, index) => {
     })
 })
 
+currentHex.forEach(hex => {
+    hex.addEventListener("click", () => {
+        copyToClipboard(hex);
+    })
+})
+
+popup.addEventListener('transitionend', () => {
+    const popupBox = popup.children[0];
+    popup.classList.remove("active");
+    popupBox.classList.remove("active");
+})
 
 function generateHex() {
     // letters = "0123456789ABCDEF";
@@ -141,5 +152,16 @@ function resetInputs() {
     })
 }
 
+function copyToClipboard(hex) {
+    const el = document.createElement("textarea");
+    el.value = hex.innerText;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    const popupBox = popup.children[0];
+    popup.classList.add("active");
+    popupBox.classList.add("active");
+}
 
 randomColors();
