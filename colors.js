@@ -75,8 +75,9 @@ function colorizeSliders(color, hue, brightness, saturation) {
     const scaleBright = chroma.scale(["black", midBright, "white"]);
     
     saturation.style.backgroundImage = `linear-gradient(to right, ${scaleSat(0)}, ${scaleSat(1)})`;
-    brightness.style.backgroundImage = `linear-gradient(to right, ${scaleBright(0)}, ${scaleBright(1)})`;
+    brightness.style.backgroundImage = `linear-gradient(to right, ${scaleBright(0)}, ${scaleBright(0.5)}, ${scaleBright(1)})`;
     hue.style.backgroundImage = `linear-gradient(to right, rgb(204, 75, 75), rgb(204, 204, 75), rgb(75, 204, 75), rgb(75, 204, 204), rgb(75, 75, 204), rgb(204, 75, 204), rgb(204, 75, 75))`;
+
 }
 
 
@@ -99,7 +100,9 @@ function hslControls(e) {
         .set("hsl.l", brightness.value)
         .set("hsl.h", hue.value)
 
-        colorDivs[index].style.backgroundColor = color;
+    colorDivs[index].style.backgroundColor = color;
+
+    colorizeSliders(color, hue, brightness, saturation)
 }
 
 function updateTextUI(index) {
