@@ -7,7 +7,9 @@ const popup = document.querySelector(".copy-container");
 const adjustButton = document.querySelectorAll(".adjust");
 const closeAdjustments = document.querySelectorAll(".close-adjustment");
 const sliderContainers = document.querySelectorAll(".sliders");
+const lockButton = document.querySelectorAll(".lock");
 
+generateBtn.addEventListener("click", randomColors); 
 
 sliders.forEach(slider => {
     slider.addEventListener("input", hslControls)
@@ -80,6 +82,11 @@ function randomColors() {
 
     });
     resetInputs();
+
+    adjustButton.forEach((button, index) => {
+        checkTextContrast(initialColors[index], button);
+        checkTextContrast(initialColors[index], lockButton[index]);
+    })
 }
 
 
