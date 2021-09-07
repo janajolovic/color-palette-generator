@@ -45,6 +45,19 @@ closeAdjustments.forEach((button, index) => {
     })
 });
 
+lockButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+        lockColor(index);
+    })
+})
+
+function lockColor(index) {
+    colorDivs[index].classList.toggle("locked");
+    lockButton[index].children[0].classList.toggle("fa-lock-open");
+    lockButton[index].children[0].classList.toggle("fa-lock");
+}
+
+  
 function generateHex() {
     // letters = "0123456789ABCDEF";
     // hash = "#";
@@ -57,6 +70,7 @@ function generateHex() {
     return hexColor;
 }
 
+
 function randomColors() {
     initialColors = [];
 
@@ -64,7 +78,15 @@ function randomColors() {
         const hexText = div.children[0];
         const randomColor = generateHex();
 
-        initialColors.push(chroma(randomColor).hex());
+        if (div.classList.contains('locked')) {
+            initialColors.push(hexText.innerText);
+            return;
+        } else {
+            // Add it to the array 
+            initialColors.push(chroma(randomColor).hex());
+        }
+        
+    
 
         div.style.backgroundColor = randomColor;
         hexText.innerText = randomColor;
