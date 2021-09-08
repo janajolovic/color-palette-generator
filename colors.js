@@ -282,6 +282,20 @@ function savePalettes(e) {
     paletteBtn.classList.add(paletteObj.nr);
     paletteBtn.innerText = "Select";
 
+    paletteBtn.addEventListener("click", e => {
+        closeLibrary();
+        const paletteIndex = e.target.classList[1];
+        initialColors = [];
+        savedPalettes[paletteIndex].colors.forEach((color, index) => {
+            initialColors.push(color);
+            colorDivs[index].style.backgroundColor = color;
+            const text = colorDivs[index].children[0];
+            checkTextContrast(color, text);
+            updateTextUI(index);
+        })
+        libraruInputUpdate();
+    })
+
     palette.appendChild(title);
     palette.appendChild(preview);
     palette.appendChild(paletteBtn);
@@ -313,6 +327,9 @@ function closeLibrary() {
     popup.classList.remove("active");
 }
 
+function libraruInputUpdate() {
+    
+}
 
 
 randomColors();
