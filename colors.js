@@ -257,7 +257,14 @@ function savePalettes(e) {
         colors.push(hex.innerText);
     }) 
     
-    let PaletteNr = savedPalettes.length;
+    let PaletteNr;
+    const paletteObject = JSON.parse(localStorage.getItem("palettes"));
+    if (paletteObject) {
+        PaletteNr = paletteObject.length;
+    } else {
+        PaletteNr = savedPalettes.length;
+    }
+
     const paletteObj = {name, colors, nr : PaletteNr }
     savedPalettes.push(paletteObj);
 
@@ -332,6 +339,7 @@ function getLocal() {
         localPalettes = [];
     } else {
         const paletteObject = JSON.parse(localStorage.getItem("palettes"));
+        savedPalettes = [...paletteObject];
         paletteObject.forEach(paletteObj => {
             const palette = document.createElement("div");
             palette.classList.add("custom-palette");
