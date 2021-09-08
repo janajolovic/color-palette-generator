@@ -100,7 +100,6 @@ function randomColors() {
         const hue = sliders[0];
         const brightness = sliders[1];
         const saturation = sliders[2];
-        console.log(sliders)
 
         colorizeSliders(color, hue, brightness, saturation);
 
@@ -238,6 +237,36 @@ function closePalette(e) {
     const popup = saveContainer.children[0];
     saveContainer.classList.remove("active");
     popup.classList.remove("active");
+}
+
+submitSave.addEventListener("click", savePalettes);
+
+function savePalettes(e) {
+    saveContainer.classList.remove("active");
+    popup.classList.remove("active");
+    const name = saveInput.value;
+    const colors = [];
+    currentHex.forEach(hex => {
+        colors.push(hex.innerText);
+    }) 
+    
+    let PaletteNr = savedPalettes.length;
+    const paletteObj = {name, colors, nr : PaletteNr }
+    savedPalettes.push(paletteObj);
+
+    savetoLocal(paletteObj);
+    saveInput.value = "";
+}
+
+function savetoLocal(paletteObj) {
+    let localPalettes;
+    if (localStorage.getItem("palettes") === null)  {
+        localPalettes = []
+    } else {
+        localPalettes = JSON.parse(localStorage.getItem("palettes"));
+    }
+    localPalettes.push(paletteObj);
+    localStorage.setItem("palettes", JSON.stringify(localPalettes))
 }
 
 
